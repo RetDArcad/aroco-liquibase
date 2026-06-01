@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
 
-    <changeSet id="1.0.0-countries" author="aroco">
+    <changeSet id="1.0.0.0-countries" author="aroco">
         <createTable tableName="countries">
             <column name="id" type="INTEGER">
                 <constraints primaryKey="true" nullable="false"/>
@@ -15,7 +15,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1.0.0-families" author="aroco">
+    <changeSet id="1.0.0.0-families" author="aroco">
         <createTable tableName="families">
             <column name="id" type="INTEGER">
                 <constraints primaryKey="true" nullable="false"/>
@@ -29,7 +29,7 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="1.0.0-customers" author="aroco">
+    <changeSet id="1.0.0.0-customers" author="aroco">
         <createTable tableName="customers">
             <column name="id" type="INTEGER">
                 <constraints primaryKey="true" nullable="false"/>
@@ -58,7 +58,7 @@
                 constraintName="fk_customers_country"/>
     </changeSet>
 
-    <changeSet id="1.0.0-providers" author="aroco">
+    <changeSet id="1.0.0.0-providers" author="aroco">
         <createTable tableName="providers">
             <column name="id" type="INTEGER">
                 <constraints primaryKey="true" nullable="false"/>
@@ -85,7 +85,7 @@
                 constraintName="fk_providers_country"/>
     </changeSet>
 
-    <changeSet id="1.0.0-orders" author="aroco">
+    <changeSet id="1.0.0.0-orders" author="aroco">
         <createTable tableName="orders">
             <column name="id" type="INTEGER">
                 <constraints primaryKey="true" nullable="false"/>
