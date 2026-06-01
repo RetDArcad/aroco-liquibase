@@ -92,4 +92,31 @@
                 constraintName="fk_orderlines_article"/>
     </changeSet>
 
+    <changeSet id="2.0.0.0-seed-data" author="aroco">
+        <comment>Demo seed data for the articles feature</comment>
+        <sql>
+            INSERT INTO articles (id, description, sale_price, wholesale_price, familly_id, stock, minimum_quantity, customer_quantity, purchase_quantity, vat_id, creation_date, last_modification, last_modifier_id, deleted) VALUES
+              (1, 'Hex bolt M8 x 30',    0.50, 0.30, 1, 250, 50,  0, 0, 2, '2025-01-01', '2025-01-01T00:00:00.000Z', 1, 0),
+              (2, 'Wood screw 4x40',     0.10, 0.05, 2, 800, 100, 0, 0, 2, '2025-01-01', '2025-01-01T00:00:00.000Z', 1, 0),
+              (3, 'Lithium grease 100g', 6.90, 3.20, 3,  40, 10,  0, 0, 2, '2025-01-01', '2025-01-01T00:00:00.000Z', 1, 0);
+        </sql>
+        <sql>
+            INSERT INTO article_desc (id, description) VALUES
+              (1, 'Standard hex head bolt, grade 8.8, zinc plated.'),
+              (2, 'Yellow zinc wood screw, Pozidriv head.'),
+              (3, 'General purpose lithium grease in 100g tube.');
+        </sql>
+        <sql>
+            INSERT INTO article_providers (article_id, provider_id) VALUES
+              (1, 1), (1, 2), (2, 2), (3, 1);
+        </sql>
+        <sql>
+            INSERT INTO order_lines (order_id, order_year, line, article_id, quantity, quantity_delivred, price, total, total_with_vat) VALUES
+              (1, 2025, 1, 1, 100, 0,  0.50, 50.00, 60.00),
+              (1, 2025, 2, 2, 500, 0,  0.10, 50.00, 60.00),
+              (2, 2025, 1, 3,  10, 10, 6.90, 69.00, 82.80);
+        </sql>
+        <rollback/>
+    </changeSet>
+
 </databaseChangeLog>
