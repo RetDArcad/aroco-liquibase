@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="1.0.0-countries" author="aroco">
+        <createTable tableName="countries">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(80)"/>
+            <column name="iso_code" type="VARCHAR(3)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.0-families" author="aroco">
+        <createTable tableName="families">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(80)"/>
+            <column name="vat_id" type="INTEGER"/>
+            <column name="creation_date" type="VARCHAR(32)"/>
+            <column name="last_modification" type="VARCHAR(32)"/>
+            <column name="last_modifier_id" type="INTEGER"/>
+            <column name="deleted" type="INTEGER" defaultValueNumeric="0"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.0-customers" author="aroco">
+        <createTable tableName="customers">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(80)"/>
+            <column name="phone" type="VARCHAR(20)"/>
+            <column name="vat_id" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(80)"/>
+            <column name="address_line_1" type="VARCHAR(80)"/>
+            <column name="address_line_2" type="VARCHAR(80)"/>
+            <column name="address_line_3" type="VARCHAR(80)"/>
+            <column name="city" type="VARCHAR(50)"/>
+            <column name="zip_code" type="VARCHAR(20)"/>
+            <column name="country_id" type="INTEGER"/>
+            <column name="credit_limit" type="DOUBLE PRECISION"/>
+            <column name="credit" type="DOUBLE PRECISION"/>
+            <column name="last_order" type="VARCHAR(32)"/>
+            <column name="creation_date" type="VARCHAR(32)"/>
+            <column name="last_update" type="VARCHAR(32)"/>
+            <column name="last_modifier_id" type="INTEGER"/>
+            <column name="deleted" type="INTEGER" defaultValueNumeric="0"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="customers" baseColumnNames="country_id"
+                referencedTableName="countries" referencedColumnNames="id"
+                constraintName="fk_customers_country"/>
+    </changeSet>
+
+    <changeSet id="1.0.0-providers" author="aroco">
+        <createTable tableName="providers">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(80)"/>
+            <column name="contact" type="VARCHAR(80)"/>
+            <column name="phone" type="VARCHAR(20)"/>
+            <column name="vat_id" type="VARCHAR(20)"/>
+            <column name="email" type="VARCHAR(80)"/>
+            <column name="address_line_1" type="VARCHAR(80)"/>
+            <column name="address_line_2" type="VARCHAR(80)"/>
+            <column name="address_line_3" type="VARCHAR(80)"/>
+            <column name="zipcode" type="VARCHAR(20)"/>
+            <column name="city" type="VARCHAR(50)"/>
+            <column name="country_id" type="INTEGER"/>
+            <column name="creation_date" type="VARCHAR(32)"/>
+            <column name="last_modification" type="VARCHAR(32)"/>
+            <column name="last_modifier_id" type="INTEGER"/>
+            <column name="deleted" type="INTEGER" defaultValueNumeric="0"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="providers" baseColumnNames="country_id"
+                referencedTableName="countries" referencedColumnNames="id"
+                constraintName="fk_providers_country"/>
+    </changeSet>
+
+    <changeSet id="1.0.0-orders" author="aroco">
+        <createTable tableName="orders">
+            <column name="id" type="INTEGER">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="year" type="INTEGER"/>
+            <column name="customer_id" type="INTEGER"/>
+            <column name="order_date" type="BIGINT"/>
+            <column name="delivery_date" type="BIGINT"/>
+            <column name="closing_date" type="BIGINT"/>
+        </createTable>
+        <addForeignKeyConstraint
+                baseTableName="orders" baseColumnNames="customer_id"
+                referencedTableName="customers" referencedColumnNames="id"
+                constraintName="fk_orders_customer"/>
+    </changeSet>
+
+</databaseChangeLog>
